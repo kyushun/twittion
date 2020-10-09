@@ -13,9 +13,9 @@ app = Flask(__name__)
 
 @app.route("/")
 def save_images():
-    id = request.args.get('id')
+    id = request.args.get('id') or ""
     url_match = twitter_url_pettern.match(id)
-    if id is None or not id.isdecimal():
+    if not id.isdecimal():
         if url_match:
             id = url_match.groups()[0]
         else:
