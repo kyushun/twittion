@@ -18,7 +18,7 @@ auth.set_access_token(access_token, access_token_secret)
 
 def get_status(id):
     api = tweepy.API(auth)  
-    return api.get_status(id)
+    return api.get_status(id, tweet_mode='extended')
 
 def get_url(status):
     return f"https://twitter.com/{status.user.id}/status/{status.id}"
@@ -30,7 +30,7 @@ def get_post_date(status):
     return status.created_at + datetime.timedelta(hours=9)
 
 def get_text(status):
-    return status.text
+    return status.full_text
 
 def get_image_urls(status):
     image_urls = []
