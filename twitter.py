@@ -1,4 +1,5 @@
 import os
+import datetime
 import tweepy
 from os.path import join, dirname
 from dotenv import load_dotenv
@@ -26,7 +27,7 @@ def get_username(status):
     return status.user.name
 
 def get_post_date(status):
-    return status.created_at
+    return status.created_at + datetime.timedelta(hours=9)
 
 def get_text(status):
     return status.text

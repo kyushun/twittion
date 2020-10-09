@@ -23,9 +23,10 @@ def save_images():
     tweet_text = twitter.get_text(status)
     tweet_url = twitter.get_url(status)
     tweet_username = twitter.get_username(status)
+    tweet_posted_at = twitter.get_post_date(status)
 
     page = uploader.create_new_page(tweet_text)
-    uploader.set_properties(page, url=tweet_url, username=tweet_username)
+    uploader.set_properties(page, url=tweet_url, username=tweet_username, posted_at=tweet_posted_at)
 
     for url in image_urls:
         response = requests.get(url)

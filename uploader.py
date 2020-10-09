@@ -18,13 +18,15 @@ def create_new_page(title):
     row.name = title
     return row
 
-def set_properties(row, *, text=None, url=None, username=None):
+def set_properties(row, *, text=None, url=None, username=None, posted_at=None):
     if text is not None:
         row.children.add_new(TextBlock, title=text)
     if url is not None:
         row.url = url
     if username is not None:
         row.username = username
+    if posted_at is not None:
+        row.posted = posted_at
 
 def add_image(row, image_path):
     image = row.children.add_new(ImageBlock)
