@@ -1,5 +1,6 @@
 import os
 import requests
+import tweepy
 import twitter
 import uploader
 from flask import Flask, request
@@ -14,7 +15,10 @@ def save_images():
     if id is None or not id.isdecimal():
         return "invalid params"
 
-    status = twitter.get_status(id)
+    try:
+        status = twitter.get_status(id)
+    except tweepy.error.TweepError:
+        return "invalid id"
     image_urls = twitter.get_image_urls(status)
     tweet_text = twitter.get_text(status)
     tweet_url = twitter.get_url(status)
