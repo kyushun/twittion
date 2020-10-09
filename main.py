@@ -7,7 +7,7 @@ import uploader
 from flask import Flask, request
 
 notion_url = "https://www.notion.so/"
-twitter_url_pettern = re.compile(r"^https://twitter.com/.+/status/(\d+)$")
+twitter_url_pettern = re.compile(r"^https://twitter.com/.+/status/(\d+)")
 
 app = Flask(__name__)
 
