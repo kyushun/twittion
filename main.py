@@ -1,4 +1,5 @@
 import os
+import re
 import requests
 import tweepy
 import twitter
@@ -6,14 +7,19 @@ import uploader
 from flask import Flask, request
 
 notion_url = "https://www.notion.so/"
+twitter_url_pettern = re.compile(r"^https://twitter.com/.+/status/(\d+)$")
 
 app = Flask(__name__)
 
 @app.route("/")
 def save_images():
     id = request.args.get('id')
+    url_match = twitter_url_pettern.match(id)
     if id is None or not id.isdecimal():
-        return "invalid params"
+        if url_match:
+            id = url_match.groups()[0]
+        else:
+            return "invalid params"
 
     try:
         status = twitter.get_status(id)
