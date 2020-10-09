@@ -9,12 +9,11 @@ dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
 
 notion_token = os.environ.get("NOTION_TOKEN")
-client = NotionClient(token_v2=notion_token)
-
 notion_database_url = os.environ.get("NOTION_DATABASE_URL")
-page = client.get_block(notion_database_url)
 
 def create_new_page(title):
+    client = NotionClient(token_v2=notion_token)    
+    page = client.get_block(notion_database_url)
     row = page.collection.add_row()
     row.name = title
     return row

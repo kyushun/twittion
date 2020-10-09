@@ -15,9 +15,8 @@ access_token_secret = os.environ.get("TWITTER_ACCESS_TOKEN_SECRET")
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 
-api = tweepy.API(auth)
-
 def get_status(id):
+    api = tweepy.API(auth)  
     return api.get_status(id)
 
 def get_url(status):
