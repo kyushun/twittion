@@ -2,8 +2,7 @@ import os
 import re
 import requests
 import tweepy
-import twitter
-import uploader
+from util import notionapi, twitterapi
 from flask import Flask, request
 
 notion_url = "https://www.notion.so/"
@@ -22,17 +21,17 @@ def save_images():
             return "invalid params"
 
     try:
-        status = twitter.get_status(id)
+        status = twitterapi.get_status(id)
     except tweepy.error.TweepError:
         return "invalid id"
-    image_urls = twitter.get_image_urls(status)
-    tweet_text = twitter.get_text(status)
-    tweet_url = twitter.get_url(status)
-    tweet_username = twitter.get_username(status)
-    tweet_posted_at = twitter.get_post_date(status)
+    image_urls = twitterapi.get_image_urls(status)
+    tweet_text = twitterapi.get_text(status)
+    tweet_url = twitterapi.get_url(status)
+    tweet_username = twitterapi.get_username(status)
+    tweet_posted_at = twitterapi.get_post_date(status)
 
-    page = uploader.create_new_page(tweet_text)
-    uploader.set_properties(page, url=tweet_url, username=tweet_username, posted_at=tweet_posted_at)
+    page = notionapi.create_new_page(tweet_text)
+    notionapi.set_properties(page, url=tweet_url, username=tweet_username, posted_at=tweet_posted_at)
 
     for url in image_urls:
         response = requests.get(url)
@@ -43,7 +42,7 @@ def save_images():
         with open(filepath, "wb") as f:
             f.write(image)
 
-        uploader.add_image(page, filepath)
+        notionapi.add_image(page, filepath)
 
     page_url = notion_url + page.id.replace("-", "")
     return page_url
