@@ -1,12 +1,7 @@
 import os
 from os.path import join, dirname
-from dotenv import load_dotenv
 from notion.client import NotionClient
 from notion.block import TextBlock, ImageBlock
-
-load_dotenv(verbose=True)
-dotenv_path = join(dirname(__file__), '.env')
-load_dotenv(dotenv_path)
 
 notion_token = os.environ.get("NOTION_TOKEN")
 notion_database_url = os.environ.get("NOTION_DATABASE_URL")

@@ -2,11 +2,6 @@ import os
 import datetime
 import tweepy
 from os.path import join, dirname
-from dotenv import load_dotenv
-
-load_dotenv(verbose=True)
-dotenv_path = join(dirname(__file__), '.env')
-load_dotenv(dotenv_path)
 
 consumer_key = os.environ.get("TWITTER_CONSUMER_KEY")
 consumer_secret = os.environ.get("TWITTER_CONSUMER_SECRET")
