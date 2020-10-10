@@ -1,5 +1,5 @@
 import requests
-from util import notionapi, twitterapi
+from util import notionapi, twitterapi, notifier
 
 notion_url = "https://www.notion.so/"
 
@@ -25,4 +25,4 @@ def upload_images(tweet_status):
         notionapi.add_image(page, filepath)
 
     page_url = notion_url + page.id.replace("-", "")
-    return page_url
+    notifier.post(page_url, tweet_status)
