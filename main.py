@@ -20,19 +20,19 @@ def save_images():
         if url_match:
             id = url_match.groups()[0]
         else:
-            return "invalid params"
+            return "invalid params", 400
 
     try:
         status = twitterapi.get_status(id)
     except tweepy.error.TweepError:
-        return "invalid id"
+        return "invalid id", 404
 
     image_urls = twitterapi.get_image_urls(status)
     if len(image_urls) > 0:
         q.enqueue(uploader.upload_images, status)
-        return "ok"
+        return "ok", 202
     else:
-        return "no images"
+        return "no images", 404
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
