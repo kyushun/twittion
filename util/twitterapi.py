@@ -21,6 +21,9 @@ def get_url(status):
 def get_username(status):
     return status.user.name
 
+def get_profile_image_url(status):
+    return status.user.profile_image_url_https
+
 def get_post_date(status):
     return status.created_at + datetime.timedelta(hours=9)
 
