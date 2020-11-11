@@ -13,6 +13,6 @@ def post(notion_url, tweet_status):
                 "author_name": twitterapi.get_username(tweet_status),
                 "author_icon": twitterapi.get_profile_image_url(tweet_status),
                 "text": twitterapi.get_text(tweet_status),
-                "image_url": twitterapi.get_image_urls(tweet_status)[0].replace(":orig", ":small")
+                "image_url": twitterapi.get_image_urls(tweet_status)[0]
         }]
     }))
