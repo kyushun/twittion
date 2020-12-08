@@ -1,5 +1,5 @@
 Flask==1.1.2
-notion==0.0.25
+notion==0.0.27
 python-dotenv==0.14.0
 tweepy==3.9.0
 redis==3.5.3
